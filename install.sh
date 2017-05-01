@@ -53,12 +53,12 @@ sudo apt-get install fail2ban -y
 sudo cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local
 sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 
-# Create ubiquiti Fail2ban definition and set fail regex. 
-sudo echo -e '# Fail2Ban filter for Ubiquiti UniFi\n#\n#\n\n[Definition]\nfailregex =^.*Failed .* login .* <HOST>*\s*$
-' | sudo tee -a /etc/fail2ban/filter.d/ubiquiti.conf
+# Create unifi-controller Fail2ban definition and set fail regex. 
+sudo echo -e '# Fail2Ban filter for Ubiquiti UniFi Controller\n#\n#\n\n[Definition]\nfailregex =^.*Failed .* login .* <HOST>*\s*$
+' | sudo tee -a /etc/fail2ban/filter.d/unifi-controller.conf
 
-# Add ubiquiti JAIL to Fail2ban setting log path and blocking IPs after 3 failed logins within 15 minutes for 1 hour.
-sudo echo -e '\n[ubiquiti]\nenabled  = true\nfilter   = ubiquiti\nlogpath  = /usr/lib/unifi/logs/server.log\nmaxretry = 3\nbantime = 3600\nfindtime = 900' | sudo tee -a /etc/fail2ban/jail.local
+# Add unifi-controller JAIL to Fail2ban setting log path and blocking IPs after 3 failed logins within 15 minutes for 1 hour.
+sudo echo -e '\n[unifi-controller]\nenabled  = true\nfilter   = ubiquiti\nlogpath  = /usr/lib/unifi/logs/server.log\nmaxretry = 3\nbantime = 3600\nfindtime = 900' | sudo tee -a /etc/fail2ban/jail.local
 
 # Restart Fail2ban to apply changes above.
 sudo service fail2ban restart
