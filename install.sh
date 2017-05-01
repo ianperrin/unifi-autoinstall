@@ -27,6 +27,7 @@ sudo ufw allow 7447/tcp
 
 # Allow UniFi Controller ports on UFW firewall.
 # see https://help.ubnt.com/hc/en-us/articles/218506997-UniFi-Ports-Used
+sudo ufw allow 6789/tcp
 sudo ufw allow 8080/tcp
 sudo ufw allow 8443/tcp
 sudo ufw allow 8843/tcp
