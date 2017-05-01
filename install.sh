@@ -12,8 +12,21 @@
 # Update apt-get source list and upgrade all packages.
 sudo apt-get update && sudo apt-get upgrade -y
 
-# Allow SSH and UniFi ports on UFW firewall.
+# Allow SSH ports on UFW firewall.
 sudo ufw allow 22/tcp
+
+# Allow UniFi Video ports on UFW firewall.
+# see https://help.ubnt.com/hc/en-us/articles/217875218-UniFi-Video-Ports-Used
+sudo ufw allow 1935/tcp
+sudo ufw allow 6666/tcp
+sudo ufw allow 7080/tcp
+sudo ufw allow 7443/tcp
+sudo ufw allow 7445/tcp
+sudo ufw allow 7446/tcp
+sudo ufw allow 7447/tcp
+
+# Allow UniFi Controller ports on UFW firewall.
+# see https://help.ubnt.com/hc/en-us/articles/218506997-UniFi-Ports-Used
 sudo ufw allow 8080/tcp
 sudo ufw allow 8443/tcp
 sudo ufw allow 8843/tcp
