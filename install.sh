@@ -58,7 +58,14 @@ sudo echo -e '# Fail2Ban filter for Ubiquiti UniFi Controller\n#\n#\n\n[Definiti
 ' | sudo tee -a /etc/fail2ban/filter.d/unifi-controller.conf
 
 # Add unifi-controller JAIL to Fail2ban setting log path and blocking IPs after 3 failed logins within 15 minutes for 1 hour.
-sudo echo -e '\n[unifi-controller]\nenabled  = true\nfilter   = ubiquiti\nlogpath  = /usr/lib/unifi/logs/server.log\nmaxretry = 3\nbantime = 3600\nfindtime = 900' | sudo tee -a /etc/fail2ban/jail.local
+sudo echo -e '\n[unifi-controller]\nenabled  = true\nfilter   = unifi-controller\nlogpath  = /usr/lib/unifi/logs/server.log\nmaxretry = 3\nbantime = 3600\nfindtime = 900' | sudo tee -a /etc/fail2ban/jail.local
+
+# Create unifi-video Fail2ban definition and set fail regex. 
+sudo echo -e '# Fail2Ban filter for Ubiquiti UniFi Video\n#\n#\n\n[Definition]\nfailregex =^.*INFO .* bad login attempt \(<HOST>\) in tomcat-(?:HTTP|HTTPS)-exec-\d*$
+' | sudo tee -a /etc/fail2ban/filter.d/unifi-video.conf
+
+# Add unifi-video JAIL to Fail2ban setting log path and blocking IPs after 3 failed logins within 15 minutes for 1 hour.
+sudo echo -e '\n[unifi-video]\nenabled  = true\nfilter   = unifi-video\nlogpath  = /var/log/unifi-video/login.log\nmaxretry = 3\nbantime = 3600\nfindtime = 900' | sudo tee -a /etc/fail2ban/jail.local
 
 # Restart Fail2ban to apply changes above.
 sudo service fail2ban restart
