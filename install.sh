@@ -46,6 +46,10 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50
 # Update source list to include the UniFi repo then install Ubiquiti UniFi.
 sudo apt-get update && sudo apt-get install unifi -y
 
+# Download and install UniFi Video
+wget http://dl.ubnt.com/firmwares/unifi-video/3.6.3/unifi-video_3.6.3~Debian7_amd64.deb
+sudo dpkg -i unifi-video_3.6.3~Debian7_amd64.deb
+
 # Install Fail2Ban
 sudo apt-get install fail2ban -y
 
