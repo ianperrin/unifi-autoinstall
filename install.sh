@@ -37,7 +37,7 @@ sudo ufw allow 3478/udp
 # Enable UFW firewall.
 sudo ufw --force enable
 
-# Add Ubiquiti UniFi repo to system source list.
+# Add Ubiquiti UniFi Controller repo to system source list.
 sudo echo 'deb http://www.ubnt.com/downloads/unifi/debian unifi5 ubiquiti' | sudo tee -a /etc/apt/sources.list.d/100-ubnt.list
 
 # Add Ubiquiti GPG Keys
@@ -46,9 +46,11 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50
 # Update source list to include the UniFi repo then install Ubiquiti UniFi.
 sudo apt-get update && sudo apt-get install unifi -y
 
-# Download and install UniFi Video
-wget http://dl.ubnt.com/firmwares/unifi-video/3.6.3/unifi-video_3.6.3~Debian7_amd64.deb
-sudo dpkg -i unifi-video_3.6.3~Debian7_amd64.deb
+# Add the Unifi-Video controller repo to the system source list
+wget -O - http://www.ubnt.com/downloads/unifi-video/apt-3.x/unifi-video.gpg.key | sudo apt-key add -; platform=`lsb_release -c | awk '{print $2}'` ; sudo sh -c "echo \"deb [arch=amd64] http://www.ubnt.com/downloads/unifi-video/apt-3.x $platform ubiquiti\" > /etc/apt/sources.list.d/unifi-video.list"
+
+# Update source list to include the UniFi repo then install Ubiquiti UniFi Video.
+sudo apt-get update && sudo apt-get install unifi-video -y
 
 # Install Fail2Ban
 sudo apt-get install fail2ban -y
